@@ -1,0 +1,12 @@
+﻿adminAgentConfig:
+  id: '001' # Agent name; Example: "test_app_1"
+  buildVersion: '0101' #Version of build; Example: "0.0.1"
+  serviceGroupId: '' # MicroService group identifier; Example: "microservices_group_1"
+communicatorUrl: 'http://localhost:8091/api' # Address of Drill.Admin back-end; Example: "http://localhost:8090"
+
+coverageCollectionSettings:
+  schedulerDelayInterval: 10 # Interval in seconds of sending coverage data to Drill.Admin side 
+  collectInitProcessesCoverage: true # Collect coverage for initial processes(Background jobs, Initialization, Cron)
+
+supportedTechnologies: # An array of supported technologies. We can add here technologies, which we need to update/instrument before using
+  #- HttpClient
