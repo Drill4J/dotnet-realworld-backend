@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <RootNamespace>Realworlddotnet.Api</RootNamespace>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -9,8 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Drill4Net.Receiver" Version="1.2.4-beta-1" />
-    <PackageReference Include="Drill4Net.Receiver.WebApi" Version="1.2.6-beta-1" />
+    <PackageReference Include="Drill4Net.Receiver" Version="1.2.5-beta-1" />
+    <PackageReference Include="Drill4Net.Receiver.WebApi" Version="1.2.7-beta-2" />
     <PackageReference Include="Hellang.Middleware.ProblemDetails" Version="6.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.0" />
     <PackageReference Include="Microsoft.Data.Sqlite" Version="6.0.0" />

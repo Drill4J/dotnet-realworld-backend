@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+   dtrillNetTest:
+     image: dritest:latest
+     networks:
+       - drill4j-dev-network
+     ports:
+        - "8945:8080"
+     environment:
+       - AGENT_ID=014
+       - BUILD_VERSION=0.0.14
+       - COMMUNICATOR_URL=drill-admin:8090
+
+networks:
+   drill4j-dev-network:
+

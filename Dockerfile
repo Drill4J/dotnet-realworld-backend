@@ -1,3 +1,4 @@
+
 # https://hub.docker.com/_/microsoft-dotnet
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 
@@ -16,33 +17,38 @@ COPY . .
 WORKDIR /src
 RUN dotnet build "Api/Api.csproj" -c Release --no-restore
 
-FROM build AS test
-WORKDIR /tst/Unit.Tests
-ENTRYPOINT ["dotnet", "test", "--logger:trx"]
 
 FROM build AS publish
 WORKDIR /
 
 RUN dotnet publish "src/Api/Api.csproj" -c Release --no-build -o app
 
-COPY linux-x64 /scanner
-COPY linux-x64/appsettings.yml /appsettings.yml
+COPY scanner/linux-x64 /app/scanner
+COPY scanner/linux-x64/appsettings.yml /src/appsettings.yml
 
-# Modify appsettings.yml
-RUN sed -i 's|id: .*# Agent name|id: "002" # Agent name|' /appsettings.yml && \
-    sed -i 's|buildVersion: .*#Version of build|buildVersion: "0.0.2" #Version of build|' /appsettings.yml && \
-    sed -i 's|communicatorUrl: .*# Address of Drill.Admin back-end|communicatorUrl: "http://localhost:8091/api" # Address of Drill.Admin back-end|' /appsettings.yml
-
-# Run the scanner using the published Api.dll from /app
-RUN dotnet /scanner/Drill4Net.Scanner.dll /app --target /app/Api.dll --exclude [Api]Api.Program
-
-
+RUN ls -la 
+RUN ls -la /src
 FROM mcr.microsoft.com/dotnet/aspnet:7.0
 
-
 WORKDIR /app
-COPY --from=publish /app ./
+COPY --from=publish /app /src/app
+
+# Go to root and copy the entire content from the /src directory in the build stage
+WORKDIR /
+COPY --from=build /src /src
+COPY --from=publish /src/appsettings.yml /src/appsettings.yml
 
 EXPOSE 8080
 ENV ASPNETCORE_URLS=http://*:8080
-ENTRYPOINT ["dotnet", "Api.dll"]
+ENV AGENT_ID=007
+ENV BUILD_VERSION=0.0.7
+ENV COMMUNICATOR_URL=drill-admin:8090
+
+WORKDIR /src
+
+CMD sh -c 'sed -i "s|id: .*# Agent name|id: $AGENT_ID # Agent name|" /src/appsettings.yml && \
+ sed -i "s|buildVersion: .*#Version of build|buildVersion: $BUILD_VERSION #Version of build|" /src/appsettings.yml && \
+ sed -i "s|communicatorUrl: .*# Address of Drill.Admin back-end|communicatorUrl: $COMMUNICATOR_URL # Address of Drill.Admin back-end|" /src/appsettings.yml && \
+ dotnet app/scanner/Drill4Net.Scanner.dll /src/app --target /src/app/Api.dll && \
+ cd /src/app &&\
+ dotnet Api.dll

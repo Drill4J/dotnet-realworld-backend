@@ -66,7 +66,6 @@ builder.Services.AddOptions<JwtBearerOptions>(JwtBearerDefaults.AuthenticationSc
 
 // for SQLite in memory a connection is provided rather than a connection string
 builder.Services.AddDbContext<ConduitContext>(options => { options.UseSqlite(connection); });
-builder.Services.AddProblemDetails();
 builder.Services.ConfigureOptions<ProblemDetailsLogging>();
 
 var app = builder.Build();
@@ -82,7 +81,6 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.UseSerilogRequestLogging();
-app.UseProblemDetails();
 app.UseAuthentication();
 app.UseRouting();
 app.UseAuthorization();
