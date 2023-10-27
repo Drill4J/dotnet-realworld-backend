@@ -26,8 +26,6 @@ RUN dotnet publish "src/Api/Api.csproj" -c Release --no-build -o app
 COPY scanner/linux-x64 /app/scanner
 COPY scanner/linux-x64/appsettings.yml /src/appsettings.yml
 
-RUN ls -la 
-RUN ls -la /src
 FROM mcr.microsoft.com/dotnet/aspnet:7.0
 
 WORKDIR /app
