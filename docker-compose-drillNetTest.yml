@@ -8,8 +8,8 @@ services:
      ports:
         - "8945:8080"
      environment:
-       - AGENT_ID=018
-       - BUILD_VERSION=0.0.18
+       - AGENT_ID=021
+       - BUILD_VERSION=0.0.21
        - COMMUNICATOR_URL=drill-admin:8090
 
 networks:

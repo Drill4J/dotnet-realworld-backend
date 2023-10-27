@@ -49,4 +49,4 @@ CMD sh -c 'sed -i "s|id: .*# Agent name|id: $AGENT_ID # Agent name|" /src/appset
  sed -i "s|communicatorUrl: .*# Address of Drill.Admin back-end|communicatorUrl: $COMMUNICATOR_URL # Address of Drill.Admin back-end|" /src/appsettings.yml && \
  dotnet app/scanner/Drill4Net.Scanner.dll /src/app --target /src/app/Api.dll && \
  cd /src/app &&\
- dotnet Api.dll
+ dotnet Api.dll'
