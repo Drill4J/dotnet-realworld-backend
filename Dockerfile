@@ -39,14 +39,18 @@ COPY --from=publish /src/appsettings.yml /src/appsettings.yml
 EXPOSE 8080
 ENV ASPNETCORE_URLS=http://*:8080
 ENV AGENT_ID=007
+ENV GROUP_ID=realworld-app
 ENV BUILD_VERSION=0.0.7
 ENV COMMUNICATOR_URL=drill-admin:8090
 
 WORKDIR /src
 
 CMD sh -c 'sed -i "s|id: .*# Agent name|id: $AGENT_ID # Agent name|" /src/appsettings.yml && \
+ sed -i "s|groupId: .*# Group ID|groupId: $GROUP_ID # Group ID|" /src/appsettings.yml && \
  sed -i "s|buildVersion: .*#Version of build|buildVersion: $BUILD_VERSION #Version of build|" /src/appsettings.yml && \
  sed -i "s|communicatorUrl: .*# Address of Drill.Admin back-end|communicatorUrl: $COMMUNICATOR_URL # Address of Drill.Admin back-end|" /src/appsettings.yml && \
  dotnet app/scanner/Drill4Net.Scanner.dll /src/app --target /src/app/Api.dll && \
+ sleep 10 && \
+ timeout 10 dotnet app/scanner/Drill4Net.Scanner.dll /src/app --target /src/app/Api.dll && \
  cd /src/app &&\
  dotnet Api.dll'
