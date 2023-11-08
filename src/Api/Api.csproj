@@ -9,8 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Drill4Net.Receiver" Version="1.2.5-beta-1" />
-    <PackageReference Include="Drill4Net.Receiver.WebApi" Version="1.2.7-beta-2" />
+    <PackageReference Include="Drill4Net.Receiver" Version="1.2.6" />
+    <PackageReference Include="Drill4Net.Receiver.WebApi" Version="1.2.9" />
     <PackageReference Include="Hellang.Middleware.ProblemDetails" Version="6.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.0" />
     <PackageReference Include="Microsoft.Data.Sqlite" Version="6.0.0" />

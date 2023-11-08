@@ -8,9 +8,9 @@ services:
     ports:
       - "8945:8080"
     environment:
-      - AGENT_ID=030
+      - AGENT_ID=037
       - GROUP_ID=realworld-app
-      - BUILD_VERSION=0.0.30
+      - BUILD_VERSION=0.0.37
       - COMMUNICATOR_URL=drill-admin:8090
 
   admin-ui:
