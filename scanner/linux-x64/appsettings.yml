@@ -1,7 +1,7 @@
 ﻿adminAgentConfig:
-  id: '' # Agent name; Example: "test_app_1"
-  buildVersion: '' #Version of build; Example: "0.0.1"
-  groupId: '' # MicroService group identifier; Example: "microservices_group_1"
+  id: '777' # Agent name; Example: "test_app_1"
+  buildVersion: '777' #Version of build; Example: "0.0.1"
+  groupId: realworld-app # MicroService group identifier; Example: "microservices_group_1"
 communicatorUrl: 'http://localhost:8090' # Address of Drill.Admin back-end; Example: "http://localhost:8090"
 
 coverageCollectionSettings:
