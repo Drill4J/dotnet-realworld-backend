@@ -84,7 +84,7 @@ app.UseSerilogRequestLogging();
 app.UseAuthentication();
 app.UseRouting();
 app.UseAuthorization();
-//app.UseDrill4NetReceiverWebApi();
+app.UseDrill4NetReceiverWebApi();
 app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 app.UseSwagger();
 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "realworlddotnet v1"));
