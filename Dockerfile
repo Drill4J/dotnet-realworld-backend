@@ -52,6 +52,6 @@ CMD sh -c 'sed -i "s|id: .*# Agent name|id: $AGENT_ID # Agent name|" /src/appset
  cat /src/appsettings.yml && \
  dotnet app/scanner/Drill4Net.Scanner.dll /src/app --target /src/app/Api.dll && \
  sleep 10 && \
- timeout 10 dotnet app/scanner/Drill4Net.Scanner.dll /src/app --target /src/app/Api.dll && \
+ dotnet app/scanner/Drill4Net.Scanner.dll /src/app --target /src/app/Api.dll && \
  cd /src/app &&\
  dotnet Api.dll'
